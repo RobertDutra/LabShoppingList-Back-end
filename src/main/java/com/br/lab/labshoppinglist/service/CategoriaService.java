@@ -1,7 +1,9 @@
 package com.br.lab.labshoppinglist.service;
 
 import com.br.lab.labshoppinglist.entity.Categoria;
+import com.br.lab.labshoppinglist.entity.Produto;
 import com.br.lab.labshoppinglist.repository.CategoriaRepository;
+import com.br.lab.labshoppinglist.repository.ProdutoRepository;
 import com.br.lab.labshoppinglist.service.Interface.CategoriaInterface;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
@@ -17,8 +19,13 @@ public class CategoriaService implements CategoriaInterface {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
+    @Autowired
+    private ProdutoRepository produtoRepository;
+
     @Override
     public Categoria salvar(Categoria categoria) {
+        boolean categoria1 = this.categoriaRepository.existsByNome(categoria.getNome());
+
         return this.categoriaRepository.save(categoria);
     }
 
@@ -47,7 +54,13 @@ public class CategoriaService implements CategoriaInterface {
 
     @Override
     public String deletar(Long id) {
+        List<Produto> produtos = this.produtoRepository.findAll();
         Optional<Categoria> categoria = this.categoriaRepository.findById(id);
+        for (Produto produto: produtos) {
+            if (categoria.get().getId() == produto.getCategoria().getId()){
+                return "Categoria já associada a um produto.";
+            }
+        }
         if(categoria.isPresent()){
             this.categoriaRepository.delete(categoria.get());
             return "Categoria excluida com sucesso.";
