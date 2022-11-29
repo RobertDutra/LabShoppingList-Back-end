@@ -20,6 +20,7 @@ public class ProdutoService implements ProdutoInterface {
 
     @Override
     public Produto salvar(Produto produto) {
+
         return this.produtoRepository.save(produto);
     }
 
@@ -35,9 +36,9 @@ public class ProdutoService implements ProdutoInterface {
             BeanUtils.copyProperties(produto, produto1.get(), "id");
             return this.produtoRepository.save(produto1.get());
         }
-
-
-        return null;
+        else{
+            throw new EntityNotFoundException("Produto com id " + id + " não encontrado!");
+        }
     }
 
     @Override
@@ -52,7 +53,7 @@ public class ProdutoService implements ProdutoInterface {
         Optional<Produto> produto = this.produtoRepository.findById(id);
         if (produto.isPresent()){
             this.produtoRepository.delete(produto.get());
-            return "Deletado com sucesso.";
+            return "Produto deletado com sucesso.";
         }
         return "Produto com id " + id + " não encontrado!";
     }

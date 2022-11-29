@@ -25,7 +25,9 @@ public class CategoriaService implements CategoriaInterface {
     @Override
     public Categoria salvar(Categoria categoria) {
         boolean categoria1 = this.categoriaRepository.existsByNome(categoria.getNome());
-
+        if (categoria1){
+            throw new EntityNotFoundException("Categoria já cadastrada.");
+        }
         return this.categoriaRepository.save(categoria);
     }
 
@@ -41,8 +43,9 @@ public class CategoriaService implements CategoriaInterface {
             BeanUtils.copyProperties(categoria, categoria1.get(), "id");
             return this.categoriaRepository.save(categoria1.get());
         }
-
-        return null;
+        else{
+            throw new EntityNotFoundException("Categoria com id " + id + " não encontrado!");
+        }
     }
 
     @Override
