@@ -42,8 +42,14 @@ public class ProdutoController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void deletarProduto(@PathVariable Long id){
-        this.produtoService.deletar(id);
+    public String deletarProduto(@PathVariable Long id){
+        return this.produtoService.deletar(id);
+    }
+
+    @GetMapping("/valortotal")
+    @ResponseStatus(HttpStatus.OK)
+    public String valorTotalProdutos(){
+        return this.produtoService.valorTotal();
     }
 
 }

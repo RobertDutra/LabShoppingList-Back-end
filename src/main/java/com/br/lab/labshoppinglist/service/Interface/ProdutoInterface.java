@@ -15,5 +15,7 @@ public interface ProdutoInterface {
 
     Produto buscar(Long id);
 
-    void deletar(Long id);
+    String deletar(Long id);
+
+    String valorTotal();
 }

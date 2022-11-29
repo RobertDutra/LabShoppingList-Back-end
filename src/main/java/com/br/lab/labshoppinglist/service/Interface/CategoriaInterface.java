@@ -14,7 +14,7 @@ public interface CategoriaInterface {
 
     Categoria buscar(Long id);
 
-    void deletar(Long id);
+    String deletar(Long id);
 
 
 }

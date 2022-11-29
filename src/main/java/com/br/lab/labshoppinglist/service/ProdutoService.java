@@ -48,9 +48,24 @@ public class ProdutoService implements ProdutoInterface {
     }
 
     @Override
-    public void deletar(Long id) {
+    public String deletar(Long id) {
         Optional<Produto> produto = this.produtoRepository.findById(id);
         if (produto.isPresent()){
-            this.produtoRepository.delete(produto.get());}
+            this.produtoRepository.delete(produto.get());
+            return "Deletado com sucesso.";
+        }
+        return "Produto com id " + id + " não encontrado!";
+    }
+
+    @Override
+    public String valorTotal(){
+        List<Produto> produtosComprados = this.produtoRepository.findAll();
+        Double valorTotal = 0.0;
+        for (Produto produto: produtosComprados) {
+            if (produto.isComprado()){
+                valorTotal += produto.getValor();
+            }
+        }
+        return "Valor total dos produtos: " + valorTotal ;
     }
 }

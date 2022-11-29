@@ -46,10 +46,12 @@ public class CategoriaService implements CategoriaInterface {
     }
 
     @Override
-    public void deletar(Long id) {
+    public String deletar(Long id) {
         Optional<Categoria> categoria = this.categoriaRepository.findById(id);
         if(categoria.isPresent()){
             this.categoriaRepository.delete(categoria.get());
+            return "Categoria excluida com sucesso.";
         }
+        return "Categoria com id " + id + " não encontrado!";
     }
 }
