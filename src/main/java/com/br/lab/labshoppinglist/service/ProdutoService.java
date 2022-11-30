@@ -66,9 +66,9 @@ public class ProdutoService implements ProdutoInterface {
             if (produto.isComprado()){
                 valorTotal += produto.getValor();
             }
-            else {
-                return "Não à produtos comprados no momento!";
-            }
+//            else {
+//                return "Não à produtos comprados no momento!";
+//            }
         }
         return "Valor total dos produtos: " + valorTotal ;
     }
