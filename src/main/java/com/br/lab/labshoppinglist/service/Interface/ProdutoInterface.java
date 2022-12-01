@@ -1,17 +1,17 @@
 package com.br.lab.labshoppinglist.service.Interface;
 
-import com.br.lab.labshoppinglist.entity.Categoria;
+import com.br.lab.labshoppinglist.dto.ProdutoDto;
 import com.br.lab.labshoppinglist.entity.Produto;
 
 import java.util.List;
 
 public interface ProdutoInterface {
 
-    Produto salvar(Produto produto);
+    ProdutoDto salvar(ProdutoDto produtoDto);
 
     List<Produto> listaProdutos();
 
-    Produto atualizar(Long id, Produto produto);
+    ProdutoDto atualizar(Long id, ProdutoDto produtoDto);
 
     Produto buscar(Long id);
 

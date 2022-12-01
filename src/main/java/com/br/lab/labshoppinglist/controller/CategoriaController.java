@@ -4,12 +4,11 @@ import com.br.lab.labshoppinglist.dto.CategoriaDto;
 import com.br.lab.labshoppinglist.entity.Categoria;
 import com.br.lab.labshoppinglist.execptions.InvalidCategoriaException;
 import com.br.lab.labshoppinglist.service.CategoriaService;
-import com.br.lab.labshoppinglist.utils.CategoriaMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.catalog.Catalog;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -21,7 +20,7 @@ public class CategoriaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public CategoriaDto salvarCategoria(@RequestBody CategoriaDto categoriaDto){
+    public CategoriaDto salvarCategoria(@RequestBody @Valid CategoriaDto categoriaDto){
         return this.categoriaService.salvar(categoriaDto);
     }
 
@@ -39,7 +38,7 @@ public class CategoriaController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public CategoriaDto atualizarCategoria(@PathVariable Long id, @RequestBody CategoriaDto categoriaDto){
+    public CategoriaDto atualizarCategoria(@PathVariable Long id, @RequestBody @Valid CategoriaDto categoriaDto){
         return this.categoriaService.atualizar(id, categoriaDto);
     }
 

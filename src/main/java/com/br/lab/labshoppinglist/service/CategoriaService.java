@@ -8,14 +8,13 @@ import com.br.lab.labshoppinglist.repository.CategoriaRepository;
 import com.br.lab.labshoppinglist.repository.ProdutoRepository;
 import com.br.lab.labshoppinglist.service.Interface.CategoriaInterface;
 import com.br.lab.labshoppinglist.utils.CategoriaMapper;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class CategoriaService implements CategoriaInterface {
