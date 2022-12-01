@@ -21,6 +21,10 @@ public class ProdutoService implements ProdutoInterface {
 
     @Override
     public ProdutoDto salvar(ProdutoDto produtoDto) {
+        boolean produto1 = this.produtoRepository.existsByNome(produtoDto.getNome());
+        if (produto1){
+            throw new EntityNotFoundException("Produto com o nome " + produtoDto.getNome() + " já cadastrado!" );
+        }
         this.produtoRepository.save(ProdutoMapper.dtoToEntity(produtoDto));
         return produtoDto;
     }
@@ -66,6 +70,11 @@ public class ProdutoService implements ProdutoInterface {
                 valorTotal += produto.getValor();
             }
         }
-        return "Valor total dos produtos: " + valorTotal ;
+        return "Valor total dos produtos: R$ " + format(valorTotal);
+    }
+
+    public static String format(double x) {
+        return String.format("%.2f", x);
     }
 }
+

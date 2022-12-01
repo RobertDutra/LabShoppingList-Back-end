@@ -27,30 +27,35 @@ public class ProdutoController {
         return this.produtoService.salvar(produtoDto);
     }
 
+    @ApiOperation("Serviço para listar os produtos cadastrados.")
     @GetMapping()
     @ResponseStatus(HttpStatus.OK)
     public List<Produto> listaProdutos(){
         return this.produtoService.listaProdutos();
     }
 
+    @ApiOperation("Serviço para procurar produto pelo Id.")
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Produto buscarProduto(@PathVariable Long id){
         return this.produtoService.buscar(id);
     }
 
+    @ApiOperation("Serviço para atualizar produdo, passando o Id.")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public ProdutoDto atualizarProduto(@PathVariable Long id, @RequestBody @Valid ProdutoDto produtoDto){
         return this.produtoService.atualizar(id,produtoDto);
     }
 
+    @ApiOperation("Serviço para deletar produto, passando seu Id.")
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public String deletarProduto(@PathVariable Long id){
         return this.produtoService.deletar(id);
     }
 
+    @ApiOperation("Serviço para mostrar valor total dos produtos já comprados.")
     @GetMapping("/valortotal")
     @ResponseStatus(HttpStatus.OK)
     public String valorTotalProdutos(){

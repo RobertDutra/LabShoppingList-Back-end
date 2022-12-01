@@ -29,7 +29,7 @@ public class CategoriaService implements CategoriaInterface {
     public CategoriaDto salvar(CategoriaDto categoriaDto) {
         boolean categoria1 = this.categoriaRepository.existsByNome(categoriaDto.getNome());
         if (categoria1){
-            throw new EntityNotFoundException("Categoria já cadastrada.");
+            throw new EntityNotFoundException("Categoria com nome " + categoriaDto.getNome() + " já cadastrada.");
         }
         this.categoriaRepository.save(CategoriaMapper.dtoToEntity(categoriaDto));
         return categoriaDto;
@@ -37,8 +37,8 @@ public class CategoriaService implements CategoriaInterface {
 
     @Override
     public List<Categoria> listaCategorias() {
-//        Caso tenha como retorno CategoriaDto
-//        return this.categoriaRepository.findAll().stream().map(CategoriaMapper::dtoToEntity).collect(Collectors.toList());
+//        Caso tenha como retorno de CategoriaDto
+//        return this.categoriaRepository.findAll().stream().map(CategoriaMapper::entityToDto).collect(Collectors.toList());
         return this.categoriaRepository.findAll();
     }
 

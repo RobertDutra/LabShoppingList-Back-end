@@ -18,6 +18,7 @@ public class ProdutoDto {
     @NotBlank
     private String nome;
 
+    @NotNull
     private Categoria categoria;
 
     @PositiveOrZero
